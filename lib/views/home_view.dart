@@ -1,3 +1,4 @@
+import 'package:bookly/widgets/book_card_list_view.dart';
 import 'package:bookly/widgets/book_item.dart';
 import 'package:bookly/widgets/books_horzintail_list_view.dart';
 import 'package:bookly/widgets/custom_appbar.dart';
@@ -12,17 +13,16 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: const CustomAppBar(),
       ),
-      body: const Column(
+      body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(
-            padding: EdgeInsets.only(bottom: 50.0),
-            child: SizedBox(
-              height: 200,
-              child: BooksHorizontalListView(),
-            ),
+          const SizedBox(
+            height: 200,
+            child: BooksHorizontalListView(),
           ),
-         
+          SizedBox(
+              height: MediaQuery.of(context).size.height - 280,
+              child: const BookCardListView())
         ],
       ),
     );
