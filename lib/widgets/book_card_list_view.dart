@@ -7,7 +7,7 @@ class BookCardListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: 30,
       itemBuilder: (context, index) => const BookCard(),
     );
   }

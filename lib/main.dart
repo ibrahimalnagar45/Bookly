@@ -1,3 +1,4 @@
+import 'package:bookly/views/review_view.dart';
 import 'package:flutter/material.dart';
 
 import 'views/home_view.dart';
@@ -14,7 +15,7 @@ class Bookly extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      home: const HomeView(),
+      home: const ReviewView(),
     );
   }
 }

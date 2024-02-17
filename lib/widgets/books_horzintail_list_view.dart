@@ -8,11 +8,12 @@ class BooksHorizontalListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      
       scrollDirection: Axis.horizontal,
       itemCount: 10,
       itemBuilder: (context, index) {
-        return const BookItem();
+        return const BookItem(
+          withPlayIcon: true,
+        );
       },
     );
   }

@@ -5,11 +5,14 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Bookly'),
-        Icon(
+        Image.asset(
+          'assets/images/Logo.png',
+          height: 18,
+        ),
+        const Icon(
           Icons.search,
           size: 30,
         ),
