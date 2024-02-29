@@ -12,7 +12,7 @@ class BooksHorizontalListView extends StatelessWidget {
       itemCount: 10,
       itemBuilder: (context, index) {
         return const BookItem(
-          withPlayIcon: true,
+          withPlayIcon: false,
         );
       },
     );
