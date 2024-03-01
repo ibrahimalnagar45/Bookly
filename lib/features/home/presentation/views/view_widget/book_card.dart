@@ -1,6 +1,8 @@
+import 'package:bookly/assets.dart';
 import 'package:bookly/features/home/presentation/views/view_widget/book_item.dart';
 import 'package:flutter/material.dart';
- 
+import 'package:flutter/widgets.dart';
+
 import '../../../../details/presentation/views/details_view.dart';
 
 class BookCard extends StatelessWidget {
@@ -11,17 +13,26 @@ class BookCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, DetialsView.id);
-        ;
       },
-      child: const Row(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-              width: 100,
-              child: BookItem(
-                withPlayIcon: false,
-              )),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            height: 150,
+            child: AspectRatio(
+              aspectRatio: 1 / 1.5,
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage(AssetsADate.testImage),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Harry potter",

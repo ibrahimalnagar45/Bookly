@@ -1,4 +1,5 @@
 import 'package:bookly/assets.dart';
+import 'package:bookly/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'widgets/sliding_text.dart';
 
@@ -17,13 +18,10 @@ class _SplahViewState extends State<SplahView>
   @override
   void initState() {
     super.initState();
-    animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
-
-    slidingAnimation = Tween(begin: const Offset(0, 8), end: Offset.zero)
-        .animate(animationController);
-    animationController.forward();
+    initAnimation();
+    goToHome();
   }
+
 
   @override
   void dispose() {
@@ -48,4 +46,19 @@ class _SplahViewState extends State<SplahView>
       ),
     );
   }
+
+  void initAnimation() {
+    animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+
+    slidingAnimation = Tween(begin: const Offset(0, 8), end: Offset.zero)
+        .animate(animationController);
+    animationController.forward();
+  }
+
+
+  void goToHome() =>
+    Future.delayed(const Duration(seconds: 2),
+        () => Navigator.pushNamed(context, HomeView.id),);
+  
 }

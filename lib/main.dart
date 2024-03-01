@@ -14,6 +14,7 @@ class Bookly extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: kPrimaryColor),
       routes: {
         HomeView.id: (context) => const HomeView(),

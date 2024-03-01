@@ -1,4 +1,3 @@
- 
 import 'package:flutter/material.dart';
 
 import '../../../../details/presentation/views/details_view.dart';
@@ -54,6 +53,18 @@ class BookItem extends StatelessWidget {
                 DetialsView.id,
               );
             },
-            child: Image.asset('assets/images/test_image.png'));
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * .3,
+              child: AspectRatio(
+                aspectRatio: 2.7 / 4,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/test_image.png'),
+                    ),
+                  ),
+                ),
+              ),
+            ));
   }
 }
