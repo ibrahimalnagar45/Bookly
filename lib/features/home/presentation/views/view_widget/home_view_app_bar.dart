@@ -1,4 +1,5 @@
-import 'package:bookly/assets.dart';
+import 'package:bookly/core/utils/assets.dart';
+import 'package:bookly/features/search/presentation/views/search_view.dart';
 import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -16,9 +17,16 @@ class HomeAppBar extends StatelessWidget {
             height: 18,
             color: Colors.white,
           ),
-          const Icon(
-            Icons.search,
-            size: 25,
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SearchView(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.search),
           )
         ],
       ),

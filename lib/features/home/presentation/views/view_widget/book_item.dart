@@ -1,70 +1,39 @@
+import 'package:bookly/features/home/data/models/book_model/book_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../details/presentation/views/details_view.dart';
+import '../../manager/relevance_cubit/relevance_cubit.dart';
+import '../details_view.dart';
 
 class BookItem extends StatelessWidget {
-  const BookItem({super.key, required this.withPlayIcon});
-  final bool withPlayIcon;
+  const BookItem({super.key, required this.book});
 
+  final BookModel book;
   @override
   Widget build(BuildContext context) {
-    return withPlayIcon
-        ? GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, DetialsView.id);
-            },
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                // Container(
-                //   height: 200,
-                //   width: 200,
-                //   decoration: const BoxDecoration(
-                //     image: DecorationImage(
-                //       image: AssetImage('assets/images/test_image.png'),
-                //     ),
-                //   ),
-                // ),
-                Image.asset('assets/images/test_image.png'),
+    return GestureDetector(
+      onTap: () {
+        BlocProvider.of<RelevanceCubitCubit>(context).fetchRelevanceBooks();
 
-                Positioned(
-                  bottom: 40,
-                  right: 35,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      CircleAvatar(
-                          radius: 12,
-                          backgroundColor: Colors.transparent.withOpacity(.2),
-                          child: const Icon(
-                            Icons.play_arrow,
-                            size: 20,
-                          )),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )
-        : GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                DetialsView.id,
-              );
-            },
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * .3,
-              child: AspectRatio(
-                aspectRatio: 2.7 / 4,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/test_image.png'),
-                    ),
-                  ),
-                ),
+        Navigator.pushNamed(context, DetialsView.id, arguments: book);
+      },
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * .3,
+        child: AspectRatio(
+          aspectRatio: 2.5 / 4,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: CachedNetworkImage(
+              fit: BoxFit.cover,
+              imageUrl: (book.volumeInfo!.imageLinks!.thumbnail!),
+              errorWidget: (context, url, error) => const Center(
+                child: Icon(Icons.error_outline),
               ),
-            ));
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -1,8 +1,9 @@
+import 'package:bookly/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
 
-class CustomPriceContainer extends StatelessWidget {
-  const CustomPriceContainer({super.key});
-
+class BooksActions extends StatelessWidget {
+  const BooksActions({super.key, required this.book});
+  final BookModel book;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -21,7 +22,7 @@ class CustomPriceContainer extends StatelessWidget {
           ),
           child: const Center(
             child: Text(
-              '19.99\$',
+              'Free',
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -42,7 +43,7 @@ class CustomPriceContainer extends StatelessWidget {
           ),
           child: const Center(
             child: Text(
-              'Free Preview ',
+              'Free Preview',
               style: TextStyle(color: Colors.black),
             ),
           ),

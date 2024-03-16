@@ -1,105 +1,96 @@
-import 'package:bookly/assets.dart';
-import 'package:bookly/features/home/presentation/views/view_widget/book_item.dart';
+import 'package:bookly/features/home/data/models/book_model/book_model.dart';
+import 'package:bookly/features/home/presentation/manager/relevance_cubit/relevance_cubit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../details/presentation/views/details_view.dart';
+import '../details_view.dart';
+import 'rating_widget.dart';
 
 class BookCard extends StatelessWidget {
-  const BookCard({super.key});
-
+  const BookCard({super.key, required this.book});
+  final BookModel book;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, DetialsView.id);
+        BlocProvider.of<RelevanceCubitCubit>(context).fetchRelevanceBooks();
+
+        Navigator.pushNamed(context, DetialsView.id, arguments: book);
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 150,
-            child: AspectRatio(
-              aspectRatio: 1 / 1.5,
-              child: Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
+          Padding(
+            padding: const EdgeInsets.only(right: 25.0),
+            child: SizedBox(
+              height: 150,
+              child: AspectRatio(
+                aspectRatio: 1 / 1.5,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      bottomLeft: Radius.circular(8)),
+                  child: CachedNetworkImage(
                     fit: BoxFit.fill,
-                    image: AssetImage(AssetsADate.testImage),
+                    imageUrl: (book.volumeInfo!.imageLinks!.thumbnail!),
+                    errorWidget: (context, url, error) => const Center(
+                      child: Icon(Icons.error_outline),
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-          const Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Harry potter",
-                style: TextStyle(
-                  fontFamily: ' GT Sectra Fine',
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
+              SizedBox(
+                width: MediaQuery.of(context).size.width * .5,
+                child: Text(
+                  book.volumeInfo!.title!,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontFamily: ' GT Sectra Fine',
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-              Text(
-                "and the global of fire",
-                style: TextStyle(
-                  fontFamily: ' GT Sectra Fine',
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Text(
-                "J.K. Rowling",
-                style: TextStyle(
-                  fontFamily: ' GT Sectra Fine',
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
+              SizedBox(
+                width: MediaQuery.of(context).size.width * .5,
+                child: Text(
+                  book.volumeInfo!.authors?[0] ?? '',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontFamily: ' GT Sectra Fine',
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               Row(
                 children: [
-                  Text(
-                    '19.99\$',
+                  const Text(
+                    'Free',
                     style: TextStyle(
                       fontFamily: ' GT Sectra Fine',
                       color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w900,
+                      fontSize: 20,
+                      // fontWeight: FontWeight.w900,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
-                  Icon(
-                    Icons.star,
-                    color: Colors.yellow,
-                    size: 17,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    '4.8',
-                    style: TextStyle(
-                      fontFamily: ' GT Sectra Fine',
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  Text(
-                    '(23449)',
-                    style: TextStyle(
-                      fontFamily: ' GT Sectra Fine',
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  Rating(
+                    book: book,
                   ),
                 ],
-              )
+              ),
             ],
           )
         ],
