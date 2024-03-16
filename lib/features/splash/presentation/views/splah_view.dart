@@ -24,7 +24,6 @@ class _SplahViewState extends State<SplahView>
 
   @override
   void dispose() {
-    
     super.dispose();
 
     animationController.dispose();
@@ -37,7 +36,7 @@ class _SplahViewState extends State<SplahView>
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Image.asset(AssetsADate.logo),
+          Image.asset(AssetsData.logo),
           const SizedBox(
             height: 10,
           ),

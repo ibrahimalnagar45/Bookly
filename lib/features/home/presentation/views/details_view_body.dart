@@ -16,71 +16,94 @@ class DetailsViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const SizedBox(
-            height: 20,
+      child: CustomScrollView(
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
+        slivers: [
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 20,
+            ),
           ),
-          SizedBox(
-            height: 250,
-            child: Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: AspectRatio(
-                  aspectRatio: 4 / 6,
-                  child: CachedNetworkImage(
-                    fit: BoxFit.fill,
-                    imageUrl: book.volumeInfo!.imageLinks!.thumbnail!,
-                    errorWidget: (context, url, error) => const Center(
-                      child: Icon(Icons.error_outline),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 250,
+              child: Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: AspectRatio(
+                    aspectRatio: 4 / 6,
+                    child: CachedNetworkImage(
+                      fit: BoxFit.fill,
+                      imageUrl: book.volumeInfo!.imageLinks!.thumbnail!,
+                      errorWidget: (context, url, error) => const Center(
+                        child: Icon(Icons.error_outline),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
-          BookInfo(
-            book: book,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          BooksActions(
-            book: book,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            'You may also like',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 16,
             ),
           ),
-          const SizedBox(
-            height: 10,
+          SliverToBoxAdapter(
+            child: BookInfo(
+              book: book,
+            ),
           ),
-          BlocBuilder<RelevanceCubitCubit, RelevanceCubitState>(
-            builder: (context, state) {
-              if (state is RelevanceCubitSucess) {
-                return Expanded(
-                  child: BooksHorizontalListView(
-                    books: state.books,
-                  ),
-                );
-              } else if (state is RelevanceCubitFailure) {
-                return Center(
-                  child: Text(state.errMessage),
-                );
-              } else {
-                return const CustomLoadingWidget();
-              }
-            },
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 20,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: BooksActions(
+              book: book,
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 10,
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: Text(
+              'You may also like',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 10,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 150,
+              child: BlocBuilder<RelevanceCubitCubit, RelevanceCubitState>(
+                builder: (context, state) {
+                  if (state is RelevanceCubitSucess) {
+                    return Expanded(
+                      child: BooksHorizontalListView(
+                        books: state.books,
+                      ),
+                    );
+                  } else if (state is RelevanceCubitFailure) {
+                    return Center(
+                      child: Text(state.errMessage),
+                    );
+                  } else {
+                    return const CustomLoadingWidget();
+                  }
+                },
+              ),
+            ),
           ),
         ],
       ),

@@ -13,7 +13,7 @@ class HomeAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
-            AssetsADate.logo,
+            AssetsData.logo,
             height: 18,
             color: Colors.white,
           ),

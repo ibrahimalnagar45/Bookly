@@ -1,3 +1,5 @@
+import 'package:bookly/core/utils/assets.dart';
+import 'package:bookly/core/utils/widgets/custom_loading_widget.dart';
 import 'package:bookly/features/home/data/models/book_model/book_model.dart';
 import 'package:bookly/features/home/presentation/manager/relevance_cubit/relevance_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -29,14 +31,16 @@ class BookCard extends StatelessWidget {
                 aspectRatio: 1 / 1.5,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(8),
-                      bottomLeft: Radius.circular(8)),
+                    topLeft: Radius.circular(8),
+                    bottomLeft: Radius.circular(8),
+                  ),
                   child: CachedNetworkImage(
                     fit: BoxFit.fill,
-                    imageUrl: (book.volumeInfo!.imageLinks!.thumbnail!),
-                    errorWidget: (context, url, error) => const Center(
-                      child: Icon(Icons.error_outline),
-                    ),
+                    imageUrl: book.volumeInfo.imageLinks?.thumbnail ??
+                        AssetsData.noImageUrl,
+                    placeholder: (context, url) => const CustomLoadingWidget(),
+                    errorWidget: (context, url, error) =>
+                        const Center(child: Icon(Icons.error_outline)),
                   ),
                 ),
               ),

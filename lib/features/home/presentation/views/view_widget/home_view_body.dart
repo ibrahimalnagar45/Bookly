@@ -1,9 +1,9 @@
 import 'package:bookly/core/utils/styles.dart';
 import 'package:bookly/features/home/presentation/manager/all_books_cubit/all_books_cubit.dart';
 import 'package:bookly/features/home/presentation/manager/newesr_books_cubit/newest_books_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
 import 'book_card_list_view.dart';
 import 'books_horzintail_list_view.dart';
 
