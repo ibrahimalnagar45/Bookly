@@ -49,21 +49,6 @@ class HomeRepeImpl implements HomeRepo {
   }
 
 //remeber to change the endpoint for the next fun. and add the relevance to get relevance books
-  @override
-  Future<Either<Failure, List<BookModel>>> fetchtRelevanceBooks() async {
-    try {
-      var data = await _apiService.get(
-          endpoint: 'volumes?Filtering=free-ebooks&q=subject:novels');
-      List<BookModel> books = [];
-      for (var item in data['items']) {
-        books.add(BookModel.fromJson(item));
-      }
-      return right(books);
-    } catch (e) {
-      if (e is DioException) {
-        return left(ServerFailure.fromDioError(e));
-      }
-      return left(ServerFailure(errorMessage: e.toString()));
-    }
-  }
+   
+ 
 }

@@ -9,9 +9,9 @@ class RelevanceCubitCubit extends Cubit<RelevanceCubitState> {
   RelevanceCubitCubit(this._homeRepo) : super(RelevanceCubitInitial());
 
   final HomeRepo _homeRepo;
-  Future<void> fetchRelevanceBooks() async {
+  Future<void> fetchRelevanceBooks( String category) async {
     emit(RelevanceCubitLoading());
-    var books = await _homeRepo.fetchtRelevanceBooks();
+    var books = await _homeRepo.fetchtRelevanceBooks(category);
     books.fold(
       (failure) => emit(
         RelevanceCubitFailure(errMessage: failure.errorMessage),

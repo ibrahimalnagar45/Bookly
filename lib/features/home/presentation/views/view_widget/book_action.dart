@@ -1,3 +1,4 @@
+import 'package:bookly/core/utils/services/launch_url.dart';
 import 'package:bookly/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
 
@@ -41,10 +42,15 @@ class BooksActions extends StatelessWidget {
               bottomRight: Radius.circular(12),
             ),
           ),
-          child: const Center(
-            child: Text(
-              'Free Preview',
-              style: TextStyle(color: Colors.black),
+          child: Center(
+            child: TextButton(
+              onPressed: () {
+                customlaunchUrl(context, book.volumeInfo.previewLink!);
+              },
+              child: const Text(
+                'Free Preview',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
           ),
         )

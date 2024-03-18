@@ -1,4 +1,5 @@
 import 'package:bookly/core/utils/assets.dart';
+import 'package:bookly/core/utils/services/check_image_validation.dart';
 import 'package:bookly/core/utils/widgets/custom_loading_widget.dart';
 import 'package:bookly/features/home/data/models/book_model/book_model.dart';
 import 'package:bookly/features/home/presentation/manager/relevance_cubit/relevance_cubit.dart';
@@ -16,7 +17,8 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        BlocProvider.of<RelevanceCubitCubit>(context).fetchRelevanceBooks();
+        BlocProvider.of<RelevanceCubitCubit>(context)
+            .fetchRelevanceBooks(book.volumeInfo.categories?[0] ?? '');
 
         Navigator.pushNamed(context, DetialsView.id, arguments: book);
       },

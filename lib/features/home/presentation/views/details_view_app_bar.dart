@@ -1,5 +1,7 @@
+import 'package:bookly/features/home/presentation/views/details_view.dart';
 import 'package:bookly/features/home/presentation/views/home_view.dart';
- import 'package:flutter/material.dart';
+import 'package:bookly/features/search/presentation/views/search_view.dart';
+import 'package:flutter/material.dart';
 
 class DetailsViewAppBar extends StatelessWidget {
   const DetailsViewAppBar({super.key});
@@ -27,9 +29,14 @@ class DetailsViewAppBar extends StatelessWidget {
           ),
         ),
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                SearchView.id,
+              );
+            },
             icon: const Icon(
-              Icons.shopping_cart_outlined,
+              Icons.search,
               color: Colors.white,
             ))
       ],

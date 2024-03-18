@@ -16,7 +16,8 @@ class BookItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        BlocProvider.of<RelevanceCubitCubit>(context).fetchRelevanceBooks();
+        BlocProvider.of<RelevanceCubitCubit>(context)
+            .fetchRelevanceBooks(book.volumeInfo.categories?[0] ?? '');
 
         Navigator.pushNamed(context, DetialsView.id, arguments: book);
       },
@@ -29,7 +30,8 @@ class BookItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             child: CachedNetworkImage(
               fit: BoxFit.cover,
-              imageUrl: (book.volumeInfo.imageLinks?.thumbnail ?? ""),
+              imageUrl: book.volumeInfo.imageLinks?.thumbnail ??
+                  AssetsData.noImageUrl,
               placeholder: (context, url) => const CustomLoadingWidget(),
               errorWidget: (context, url, error) => const Center(
                 child: Icon(

@@ -4,7 +4,7 @@ import 'view_widgets/search_field.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
-
+static String id= 'searchView';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
