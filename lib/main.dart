@@ -10,14 +10,17 @@ import 'package:bookly/features/home/presentation/manager/newesr_books_cubit/new
 import 'package:bookly/features/search/presentation/views/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'core/services/show_snak_bar.dart';
 import 'features/home/presentation/views/details_view.dart';
 import 'features/home/presentation/views/home_view.dart';
 import 'features/splash/presentation/views/splah_view.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async{
   setupSrviceLocator();
   Bloc.observer = SimpleBlocObserver();
-
+   await  Hive.initFlutter(); 
+   
  
   runApp(const Bookly());
 }

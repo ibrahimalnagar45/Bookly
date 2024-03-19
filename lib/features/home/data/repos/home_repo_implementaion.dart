@@ -20,7 +20,7 @@ class HomeRepeImpl implements HomeRepo {
               'volumes?Filtering=free-ebooks&Pagination=maxResults:40&sorting=newest&q=$q');
       List<BookModel> books = [];
       for (var item in data['items']) {
-        books.insert(0, BookModel.fromJson(item));
+        books.add( BookModel.fromJson(item));
       }
       return right(books);
     } catch (e) {
@@ -41,7 +41,7 @@ class HomeRepeImpl implements HomeRepo {
               'volumes?Filtering=free-ebooks&Pagination=maxResults:40&q=$q');
       List<BookModel> books = [];
       for (var item in data['items']) {
-        books.insert(0, BookModel.fromJson(item));
+        books.add(BookModel.fromJson(item));
       }
       return right(books);
     } catch (e) {

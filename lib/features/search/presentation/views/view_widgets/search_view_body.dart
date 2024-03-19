@@ -1,4 +1,5 @@
 import 'package:bookly/constants.dart';
+import 'package:bookly/features/search/presentation/view_model/hive.dart';
 import 'package:flutter/material.dart';
 
 import 'search_field.dart';
@@ -21,13 +22,12 @@ class SearchViewBody extends StatelessWidget {
         const SearchField(),
         Expanded(
           child: ListView.builder(
-              itemCount: searched.length,
+              itemCount: CustomHive().getItems().length,
               itemBuilder: (context, index) {
                 return IconButton(
                   onPressed: () {},
                   icon: Text(
-                    
-                    searched[index],
+                    CustomHive().getItems()[index],
                     style: const TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 );

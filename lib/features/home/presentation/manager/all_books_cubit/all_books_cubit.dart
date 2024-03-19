@@ -8,7 +8,7 @@ class AllBooksCubit extends Cubit<AllBooksState> {
   AllBooksCubit(this._homeRepo) : super(AllBooksInitial());
   final HomeRepo _homeRepo;
 
-  Future<void> fetchAllBooks({String q = ' '}) async {
+  Future<void> fetchAllBooks({String q = 'all'}) async {
     emit(AllBooksLoading());
     var books = await _homeRepo.fetchtAllBooks(q: q);
 

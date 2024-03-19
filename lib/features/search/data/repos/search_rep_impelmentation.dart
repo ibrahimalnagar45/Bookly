@@ -8,9 +8,8 @@ import '../../../home/data/models/book_model/book_model.dart';
 import '../../../home/data/repos/home_repo.dart';
 
 class SearchRepoImpl implements SearchRpo {
-  
   final ApiService _apiService;
-  SearchRepoImpl (this._apiService);
+  SearchRepoImpl(this._apiService);
   @override
   Future<Either<Failure, List<BookModel>>> fetchtRelevanceBooks(
       String q) async {
