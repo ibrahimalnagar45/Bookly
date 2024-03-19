@@ -5,7 +5,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../manager/relevance_cubit/relevance_cubit.dart';
+import '../../../../../core/services/check_image_validation.dart';
+import '../../../../search/presentation/view_model/manager/relevance_cubit/relevance_cubit.dart';
 import '../details_view.dart';
 
 class BookItem extends StatelessWidget {
@@ -27,19 +28,23 @@ class BookItem extends StatelessWidget {
         child: AspectRatio(
           aspectRatio: 2 / 3,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: book.volumeInfo.imageLinks?.thumbnail ??
-                  AssetsData.noImageUrl,
-              placeholder: (context, url) => const CustomLoadingWidget(),
-              errorWidget: (context, url, error) => const Center(
-                child: Icon(
-                  Icons.error_outline,
-                ),
+              borderRadius: BorderRadius.circular(16),
+              child: Image.network(
+                book.volumeInfo.imageLinks?.thumbnail ?? AssetsData.noImageUrl,
+                fit: BoxFit.fill,
+              )
+              //  CachedNetworkImage(
+              //   fit: BoxFit.cover,
+              //   imageUrl:
+              //      AssetsData.noImageUrl,
+              //   placeholder: (context, url) => const CustomLoadingWidget(),
+              //   errorWidget: (context, url, error) => const Center(
+              //     child: Icon(
+              //       Icons.error_outline,
+              //     ),
+              //   ),
+              // ),
               ),
-            ),
-          ),
         ),
       ),
     );

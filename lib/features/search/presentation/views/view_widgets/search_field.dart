@@ -1,4 +1,9 @@
+import 'package:bookly/constants.dart';
+import 'package:bookly/features/home/presentation/manager/all_books_cubit/all_books_cubit.dart';
+import 'package:bookly/features/home/presentation/manager/newesr_books_cubit/newest_books_cubit.dart';
+import 'package:bookly/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({super.key});
@@ -13,15 +18,22 @@ class SearchField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           color: Colors.white.withOpacity(.15),
         ),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
             horizontal: 20.0,
           ),
           child: TextField(
+            onSubmitted: (data) {
+              searched.add(data);
+              BlocProvider.of<NewestBooksCubit>(context)
+                  .fetchNewestBooks(q: data);
+              BlocProvider.of<AllBooksCubit>(context).fetchAllBooks(q: data);
+              Navigator.pushNamed(context, HomeView.id);
+            },
             autofocus: true,
             // focusNode: FocusNode(),
             enabled: true,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Search',
               border: InputBorder.none,
             ),

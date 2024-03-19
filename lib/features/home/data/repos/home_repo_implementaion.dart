@@ -12,13 +12,15 @@ class HomeRepeImpl implements HomeRepo {
 
 //get the newest books from all category
   @override
-  Future<Either<Failure, List<BookModel>>> fetchNewestBooks() async {
+  Future<Either<Failure, List<BookModel>>> fetchNewestBooks(
+      { required String q }) async {
     try {
       var data = await _apiService.get(
-          endpoint: 'volumes?Filtering=free-ebooks&Pagination=maxResults:40&sorting=newest&q=""');
+          endpoint:
+              'volumes?Filtering=free-ebooks&Pagination=maxResults:40&sorting=newest&q=$q');
       List<BookModel> books = [];
       for (var item in data['items']) {
-        books.add(BookModel.fromJson(item));
+        books.insert(0, BookModel.fromJson(item));
       }
       return right(books);
     } catch (e) {
@@ -31,13 +33,15 @@ class HomeRepeImpl implements HomeRepo {
 
 // get all books weither new or not
   @override
-  Future<Either<Failure, List<BookModel>>> fetchtAllBooks() async {
+  Future<Either<Failure, List<BookModel>>> fetchtAllBooks(
+      {required String q  }) async {
     try {
       var data = await _apiService.get(
-          endpoint: 'volumes?Filtering=free-ebooks&Pagination=maxResults:40&q=""');
+          endpoint:
+              'volumes?Filtering=free-ebooks&Pagination=maxResults:40&q=$q');
       List<BookModel> books = [];
       for (var item in data['items']) {
-        books.add(BookModel.fromJson(item));
+        books.insert(0, BookModel.fromJson(item));
       }
       return right(books);
     } catch (e) {
@@ -47,8 +51,4 @@ class HomeRepeImpl implements HomeRepo {
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }
-
-//remeber to change the endpoint for the next fun. and add the relevance to get relevance books
-   
- 
 }

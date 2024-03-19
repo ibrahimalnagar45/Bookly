@@ -21,7 +21,7 @@ class Rating extends StatelessWidget {
           width: MediaQuery.of(context).size.width * .1,
           child: const Text(
             '2222',
-            style:   TextStyle(
+            style: TextStyle(
               fontFamily: ' GT Sectra Fine',
               color: Colors.white,
               fontWeight: FontWeight.w900,

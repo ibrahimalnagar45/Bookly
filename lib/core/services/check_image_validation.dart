@@ -1,11 +1,16 @@
-import 'package:dartz/dartz.dart';
+ 
 import 'package:dio/dio.dart';
 
-  validImageOrNor(String url) async {
+  
+ Future<bool> validImageOrNor(String? url) async {
+
+    if(url == null ){
+      return false ; 
+    }
   var response = await Dio().get(url);
   print(' the image  ${response.data}');
   if (response.statusCode == 200) {
-    return url;
+    return true;
   }
-  return '';
+  return false ;
 }

@@ -1,8 +1,8 @@
 import 'package:bookly/core/utils/assets.dart';
-import 'package:bookly/core/utils/services/check_image_validation.dart';
+import 'package:bookly/core/services/check_image_validation.dart';
 import 'package:bookly/core/utils/widgets/custom_loading_widget.dart';
 import 'package:bookly/features/home/data/models/book_model/book_model.dart';
-import 'package:bookly/features/home/presentation/manager/relevance_cubit/relevance_cubit.dart';
+import 'package:bookly/features/search/presentation/view_model/manager/relevance_cubit/relevance_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +23,6 @@ class BookCard extends StatelessWidget {
         Navigator.pushNamed(context, DetialsView.id, arguments: book);
       },
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 25.0),
@@ -36,20 +35,25 @@ class BookCard extends StatelessWidget {
                     topLeft: Radius.circular(8),
                     bottomLeft: Radius.circular(8),
                   ),
-                  child: CachedNetworkImage(
-                    fit: BoxFit.fill,
-                    imageUrl: book.volumeInfo.imageLinks?.thumbnail ??
+                  child: Image.network(
+                    book.volumeInfo.imageLinks?.thumbnail ??
                         AssetsData.noImageUrl,
-                    placeholder: (context, url) => const CustomLoadingWidget(),
-                    errorWidget: (context, url, error) =>
-                        const Center(child: Icon(Icons.error_outline)),
+                    fit: BoxFit.fill,
                   ),
+                  //     CachedNetworkImage(
+                  //   fit: BoxFit.fill,
+                  //   imageUrl: AssetsData.noImageUrl,
+                  //   placeholder: (context, url) => const CustomLoadingWidget(),
+                  //   errorWidget: (context, url, error) =>
+                  //       const Center(child: Icon(Icons.error_outline)),
+                  // ),
                 ),
               ),
             ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width * .5,

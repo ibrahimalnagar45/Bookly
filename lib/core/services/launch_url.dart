@@ -1,4 +1,4 @@
-import 'package:bookly/core/utils/services/show_snak_bar.dart';
+import 'package:bookly/core/services/show_snak_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> customlaunchUrl(context, String url) async {
