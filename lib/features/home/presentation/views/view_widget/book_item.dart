@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/services/check_image_validation.dart';
-import '../../../../search/presentation/view_model/manager/relevance_cubit/relevance_cubit.dart';
+import '../../manager/relevance_cubit/relevance_cubit.dart';
 import '../details_view.dart';
 
 class BookItem extends StatelessWidget {
@@ -30,6 +30,11 @@ class BookItem extends StatelessWidget {
           child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.network(
+                errorBuilder: (context, error, stackTrace) => const Center(
+                  child: Center(
+                    child: Icon(Icons.error),
+                  ),
+                ),
                 book.volumeInfo.imageLinks?.thumbnail ?? AssetsData.noImageUrl,
                 fit: BoxFit.fill,
               )

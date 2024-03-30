@@ -1,7 +1,11 @@
-import 'package:bookly/constants.dart';
-import 'package:bookly/features/search/presentation/view_model/hive.dart';
+import 'package:bookly/features/home/presentation/manager/all_books_cubit/all_books_cubit.dart';
+import 'package:bookly/features/home/presentation/manager/newesr_books_cubit/newest_books_cubit.dart';
+import 'package:bookly/features/home/presentation/views/home_view.dart';
+import 'package:bookly/features/search/presentation/view_model/manager/interested_cubit/interested_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'Searched_item.dart';
 import 'search_field.dart';
 
 class SearchViewBody extends StatelessWidget {
@@ -20,20 +24,32 @@ class SearchViewBody extends StatelessWidget {
           },
         )),
         const SearchField(),
-        Expanded(
-          child: ListView.builder(
-              itemCount: CustomHive().getItems().length,
-              itemBuilder: (context, index) {
-                return IconButton(
-                  onPressed: () {},
-                  icon: Text(
-                    CustomHive().getItems()[index],
-                    style: const TextStyle(fontSize: 15, color: Colors.white),
-                  ),
-                );
-              }),
-        )
+        const InterestedListView(),
       ],
+    );
+  }
+}
+
+class InterestedListView extends StatelessWidget {
+  const InterestedListView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<InterestedCubit, InterestedState>(
+      builder: (context, state) {
+        return Expanded(
+          child: ListView.builder(
+              itemCount: (BlocProvider.of<InterestedCubit>(context)
+                          .searched
+                          .length) >
+                      7
+                  ? 7
+                  : (BlocProvider.of<InterestedCubit>(context).searched.length),
+              itemBuilder: (context, index) {
+                return SearchedItem(index: index);
+              }),
+        );
+      },
     );
   }
 }

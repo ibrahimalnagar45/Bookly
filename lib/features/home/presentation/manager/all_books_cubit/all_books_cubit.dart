@@ -8,9 +8,9 @@ class AllBooksCubit extends Cubit<AllBooksState> {
   AllBooksCubit(this._homeRepo) : super(AllBooksInitial());
   final HomeRepo _homeRepo;
 
-  Future<void> fetchAllBooks({String q = 'all'}) async {
+  Future<void> fetchAllBooks({required context}) async {
     emit(AllBooksLoading());
-    var books = await _homeRepo.fetchtAllBooks(q: q);
+    var books = await _homeRepo.fetchtInterestedBooks(context:context );
 
     books.fold(
       (failure) => emit(AllBooksFailure(errMessage: failure.errorMessage)),

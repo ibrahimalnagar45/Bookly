@@ -2,7 +2,7 @@ import 'package:bookly/core/utils/assets.dart';
 import 'package:bookly/core/services/check_image_validation.dart';
 import 'package:bookly/core/utils/widgets/custom_loading_widget.dart';
 import 'package:bookly/features/home/data/models/book_model/book_model.dart';
-import 'package:bookly/features/search/presentation/view_model/manager/relevance_cubit/relevance_cubit.dart';
+import 'package:bookly/features/home/presentation/manager/relevance_cubit/relevance_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +36,8 @@ class BookCard extends StatelessWidget {
                     bottomLeft: Radius.circular(8),
                   ),
                   child: Image.network(
+                    errorBuilder: (context, error, stackTrace) =>
+                        const Center(child: Icon(Icons.error),),
                     book.volumeInfo.imageLinks?.thumbnail ??
                         AssetsData.noImageUrl,
                     fit: BoxFit.fill,
